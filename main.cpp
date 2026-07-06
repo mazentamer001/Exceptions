@@ -2,6 +2,7 @@
 #include <string>
 #include <map>
 #include "utils.hpp"
+#include "bcrypt/BCrypt.hpp"
 
 int main(){
 
@@ -27,7 +28,7 @@ int main(){
                     try{
                         check_email(email);
                         x = false;
-                        database[email] = password;
+                        database[email] = BCrypt::generateHash(password);
                         isLogedin = true;
                     } catch(const std::exception& e){
                         std::cout << "email is invalid format, enter another email\n";
@@ -42,7 +43,9 @@ int main(){
                 std::cout << "Enter valid password\n";
                 std::cin >> password;
                 for(std::pair p : database){
-                    if(p.first == email && p.second == password){
+                    std::cout << p.second << std::endl;
+                    std::cout << BCrypt::generateHash(password) << std::endl;
+                    if(p.first == email && BCrypt::validatePassword(password,p.second)){
                         std::cout << "Log in successful \n";
                         isLogedin = true;
                     }
