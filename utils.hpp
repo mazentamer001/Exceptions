@@ -1,2 +1,2 @@
 #include <string>
-void check_email(std::string email);
+void check_email(const std::string email);

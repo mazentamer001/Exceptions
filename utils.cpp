@@ -3,7 +3,7 @@
 #include <iostream>
 #include "utils.hpp"
 
-void check_email(std::string email){
+void check_email(const std::string email){
     std::regex pattern(R"(.+@.+..+)");
     
     if(std::regex_match(email, pattern))
